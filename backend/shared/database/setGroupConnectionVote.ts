@@ -2,17 +2,17 @@ import { CardValue } from '../../../shared/cards';
 import { Config, GroupItem } from '../types';
 
 export const setGroupConnectionVote = async (
-  groupId: string,
+  UserId: string,
   userId: string,
   vote: CardValue,
-  { ddb, tableName }: Config
-): Promise<GroupItem> =>
+  { tableName }: Config
+): Promise<Item> =>
   (
-    await ddb
+    await 
       .update({
         TableName: tableName,
         Key: {
-          primaryKey: `groupId:${groupId}`,
+          primaryKey: `userId:${userId}`,
         },
         UpdateExpression: `SET connections.#userId.vote = :vote`,
         ExpressionAttributeNames: {
@@ -23,4 +23,4 @@ export const setGroupConnectionVote = async (
         },
       })
       .promise()
-  ).Attributes as GroupItem;
+  ).Attributes as Item;
